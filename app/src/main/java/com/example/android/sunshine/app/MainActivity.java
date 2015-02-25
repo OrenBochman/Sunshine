@@ -16,19 +16,40 @@
 package com.example.android.sunshine.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
+import com.google.android.gms.tagmanager.Container;
+import com.google.android.gms.tagmanager.DataLayer;
+import com.google.android.gms.tagmanager.TagManager;
 
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
+
+    private static final String TAG = "GTMExample";
+    private static final String CONTAINER_ID = "GTM-TW896F";
+
+    private static final String OS = "os";
+    private static final String DEVICE_IMEI = "device_imei";
+    private static final String DEVICE_ANDROID_ID = "device_android_id";
+    private static final String GOOGLE_AD_ID = "google_ad_id";
+
+    private static  String deviceImei  = "";
+    private static  String androidId   = "";
+    private static  String googleAdId  = "";
+
+    // Set to false for release build.
+    private static final Boolean DEVELOPER_BUILD = true;
+    private Container container;
+    private DataLayer dataLayer;
+    private TelephonyManager telephonyManager;
+
+
+    TagManager tagManager = TagManager.getInstance(this);
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
